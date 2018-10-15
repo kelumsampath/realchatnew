@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
-
+const config = require('./../config/configuration');
 var Schema = mongoose.Schema;
 var dbURI = "mongodb://localhost:27017/chat";
-mongoose.connect(dbURI, { useNewUrlParser: true });
-
-
+const connectDB = mongoose.connect(config.database,(err)=>{
+    if(err){
+      console.log("Warning! Database not connected");
+    }else{
+      console.log("Database connected"); 
+    }
+    });
+    
 module.exports.user=mongoose.model('User',new Schema({
     name:String,
     handle: String,
